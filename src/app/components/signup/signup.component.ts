@@ -32,7 +32,7 @@ export class SignupComponent {
     categorias: Categoria[] = [
         { id: 1, nome: 'Vendas' },
         { id: 2, nome: 'Gerencial' },
-        { id: 3, nome: 'Caixa' }
+        { id: 3, nome: 'Cozinha' }
     ];
 
     isModalOpen: boolean = false;
