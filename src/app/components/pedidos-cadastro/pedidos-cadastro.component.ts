@@ -58,6 +58,8 @@ export class PedidosCadastroComponent implements OnInit {
   currentPageVendedores = 0;
   pageSize = 10;  // Número de registros por página
 
+  valorTotal: number = 0;
+
   loadingClientes = false;
   loadingVendedores = false;
 
@@ -93,6 +95,7 @@ export class PedidosCadastroComponent implements OnInit {
           this.clienteInput = this.pedido.cliente?.razaoSocial || this.pedido.cliente?.nomeFantasia;
           this.vendedorInput = this.pedido.vendedor?.nome;
           this.matchTipoCobranca();
+          this.matchPeriodoEntrega();
           this.loadItensDoPedido(this.pedido.id);
         },
         error: (err) => {
@@ -106,6 +109,9 @@ export class PedidosCadastroComponent implements OnInit {
     this.pedidosService.getPeriodosEntrega().subscribe({
       next: (data) => {
         this.periodosEntrega = data;
+        if(!this.isNew){
+          this.matchPeriodoEntrega();
+        }
       },
       error: (err) => {
         console.error('Erro ao carregar períodos de entrega:', err);
@@ -147,6 +153,15 @@ export class PedidosCadastroComponent implements OnInit {
     if (this.pedido && this.pedido.tipoCobranca && this.tiposCobranca.length) {
       const tipoEncontrado = this.tiposCobranca.find(tipo => tipo.id === this.pedido.tipoCobranca.id);
       this.pedido.tipoCobranca = tipoEncontrado ? tipoEncontrado : null;
+    }
+  }
+
+  matchPeriodoEntrega(): void {
+    console.log("matchPeriodoEntrega: " + this.pedido + ", " + this.pedido.periodoEntrega + ", " + this.periodosEntrega);
+    if (this.pedido && this.pedido.periodoEntrega && this.periodosEntrega.length) {
+      const periodoEncontrado = this.periodosEntrega.find(periodo => periodo.id === this.pedido.periodoEntrega.id);
+      console.log("Período: " + periodoEncontrado);
+      this.pedido.periodoEntrega = periodoEncontrado ? periodoEncontrado : null;
     }
   }
 
@@ -266,7 +281,7 @@ export class PedidosCadastroComponent implements OnInit {
 
   onSave(): void {
     // Verificação de campos obrigatórios
-    if (!this.pedido.cliente || !this.pedido.vendedor || !this.pedido.valorTotal || !this.pedido.tipoCobranca) {
+    if (!this.pedido.cliente || !this.pedido.vendedor || !this.pedido.tipoCobranca) {
       this.exibirMensagem('Preencha todos os campos obrigatórios.', false);
       return;
     }
@@ -282,7 +297,7 @@ export class PedidosCadastroComponent implements OnInit {
       dataEmissao: this.pedido.dataEmissao,
       dataEntrega: this.pedido.dataEntrega,
       idPeriodoEntrega: this.pedido.periodoEntrega.id,
-      valorTotal: this.pedido.valorTotal,
+      valorTotal: this.valorTotal,
       status: this.pedido.status,
       idTipoCobranca: this.pedido.tipoCobranca.id
     };    
@@ -296,6 +311,9 @@ export class PedidosCadastroComponent implements OnInit {
         next: (response) => {
           // Atribuir o pedido retornado
           this.pedido = response;
+
+          this.matchTipoCobranca();
+          this.matchPeriodoEntrega();
   
           // Garantir que o array de itens existe, mesmo que esteja vazio
           this.pedido.itens = itensTemporarios.length > 0 ? itensTemporarios : [];
@@ -393,7 +411,8 @@ export class PedidosCadastroComponent implements OnInit {
       dataEmissao: '',
       valorTotal: null,
       status: 'aguardando',
-      tipoCobranca: null
+      tipoCobranca: null,
+      itens: []
     };
     this.clienteInput = '';
     this.vendedorInput = '';
@@ -533,5 +552,12 @@ export class PedidosCadastroComponent implements OnInit {
       });
       this.itensParaExcluir = []; // Limpar a lista de itens para excluir
     }
+  }
+
+  getTotalPedido(): number {
+    return this.pedido.itens.reduce((total: number, item: { quantidade: number; produto: { precoVenda: number } }) => {
+      this.valorTotal = total + item.quantidade * item.produto.precoVenda;
+      return this.valorTotal;
+    }, 0);
   }
 }
