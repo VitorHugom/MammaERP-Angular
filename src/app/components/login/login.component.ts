@@ -65,8 +65,8 @@ export class LoginComponent {
               case 'ROLE_VENDAS':
                 this.router.navigate(['/vendas-home']);
                 break;
-              case 'ROLE_CAIXA':
-                this.router.navigate(['/caixa-home']);
+              case 'ROLE_COZINHA':
+                this.router.navigate(['/cozinha-home']);
                 break;
               default:
                 this.errorMessage = 'Role não reconhecida.';

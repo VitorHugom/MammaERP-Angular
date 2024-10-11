@@ -5,6 +5,7 @@ import { BuscaLiberacaoComponent } from './components/busca-liberacao/busca-libe
 import { LiberacaoUsuarioComponent } from './components/liberacao-usuario/liberacao-usuario.component';
 import { GerencialHomeComponent } from './components/gerencial-home/gerencial-home.component';
 import { VendasHomeComponent } from './components/vendas-home/vendas-home.component';
+import { CozinhaHomeComponent } from './components/cozinha-home/cozinha-home.component';
 import { ProdutosBuscaComponent } from './components/produtos-busca/busca-produtos.component';
 import { ProdutosCadastroComponent } from './components/produtos-cadastro/produtos-cadastro.component';
 import { GrupoProdutosBuscaComponent } from './components/grupo-produtos-busca/grupo-produtos-busca.component';
@@ -27,6 +28,8 @@ export const routes: Routes = [
     { path: 'vendas-home', component: VendasHomeComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_VENDAS'] }},
     
     { path: 'gerencial-home', component: GerencialHomeComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+
+    { path: 'cozinha-home', component: CozinhaHomeComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_COZINHA'] }},
 
     { path: 'produtos/:id', component: ProdutosCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
     { path: 'busca-produtos', component: ProdutosBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
