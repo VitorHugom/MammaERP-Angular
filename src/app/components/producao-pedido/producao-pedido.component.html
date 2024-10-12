@@ -1,0 +1,41 @@
+<div class="producao-pedido-container">
+    <h1>Produção do Pedido - Cliente: {{ pedido?.cliente?.razaoSocial }}</h1>
+  
+    <div *ngIf="pedido">
+      <div class="form-group">
+        <label>ID do Pedido</label>
+        <span>{{ pedido.id }}</span>
+      </div>
+  
+      <div class="form-group">
+        <label>Cliente</label>
+        <span>{{ pedido.cliente.razaoSocial }}</span>
+      </div>
+  
+      <h3>Itens do Pedido</h3>
+      <table class="itens-table">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Valor Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pedido.itens">
+            <td>{{ item.produto?.descricao }}</td>
+            <td>{{ item.quantidade }}</td>
+            <td>{{ item.preco | currency: 'BRL' }}</td>
+            <td>{{ (item.quantidade * item.preco) | currency: 'BRL' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="button-group">
+      <button (click)="finalizarPedido()" class="finalizar-button">Finalizar Pedido</button>
+      <button (click)="goBack()" class="voltar-button">Voltar</button>
+    </div>
+  </div>
+  

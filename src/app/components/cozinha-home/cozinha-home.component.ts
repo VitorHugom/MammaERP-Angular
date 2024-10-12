@@ -19,7 +19,7 @@ export class CozinhaHomeComponent {
   }
 
   abrirAgenda(): void {
-    this.router.navigate(['/agenda-pedidos']);
+    this.router.navigate(['/agenda-pedido']);
   }
 
   abrirReceitas(): void {

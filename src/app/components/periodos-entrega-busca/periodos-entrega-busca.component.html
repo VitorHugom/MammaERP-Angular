@@ -1,0 +1,28 @@
+<div class="busca-periodos-entrega-container">
+    <h1>Buscar Períodos de Entrega</h1>
+  
+    <div class="search-container">
+      <input type="text" [(ngModel)]="searchQuery" (keydown.enter)="searchPeriodosEntrega()" placeholder="Buscar períodos..." class="search-input">
+      <select [(ngModel)]="searchBy" class="search-select">
+        <option value="descricao">Descrição</option>
+        <option value="id">ID</option>
+      </select>
+      <button (click)="searchPeriodosEntrega()" class="search-button">Buscar</button>
+    </div>
+  
+    <ul *ngIf="filteredPeriodos.length > 0; else noPeriodos" class="periodo-list">
+      <li *ngFor="let periodo of filteredPeriodos" (click)="viewPeriodo(periodo.id)" class="periodo-item">
+        (ID: {{ periodo.id }}) {{ periodo.descricao }} - {{ periodo.horarioInicio }} às {{ periodo.horarioFim }}
+      </li>
+    </ul>
+  
+    <ng-template #noPeriodos>
+      <p>Nenhum período encontrado.</p>
+    </ng-template>
+  
+    <div class="button-container">
+      <button (click)="navigateToHome()" class="nav-button">Voltar para Home</button>
+      <button (click)="createNovoPeriodo()" class="nav-button novo-button">Novo</button>
+    </div>
+  </div>
+  

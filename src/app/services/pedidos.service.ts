@@ -52,5 +52,15 @@ export class PedidosService {
 
   getPeriodosEntrega() {
     return this.http.get<any[]>(`${this.periodosUrl}`);
-  }  
+  }
+
+  // Busca todos os pedidos aguardando
+  getPedidosAguardando(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/aguardando`);
+  }
+
+  getPedidosPorMes(ano: number, mes: number, page: number = 0, size: number = 10): Observable<any> {
+    return this.http.get(`${this.baseUrl}/agenda/${ano}/${mes}?page=${page}&size=${size}`);
+  }
+  
 }

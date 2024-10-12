@@ -1,0 +1,37 @@
+mat-dialog-content {
+    max-height: 400px;
+    overflow-y: auto;
+  
+    h3 {
+      color: #007bff;
+      margin-top: 20px;
+    }
+  
+    ul {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        padding: 5px 0;
+        border-bottom: 1px solid #ddd;
+      }
+    }
+
+    .itens-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      
+      .itens-table th, .itens-table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      
+      .itens-table th {
+        background-color: #f2f2f2;
+      }
+      
+  }
+  

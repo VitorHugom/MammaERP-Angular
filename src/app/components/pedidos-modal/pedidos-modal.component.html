@@ -1,0 +1,52 @@
+<h2 mat-dialog-title *ngIf="!selectedPedido">Pedidos para {{ data.date }}</h2>
+<h2 mat-dialog-title *ngIf="selectedPedido">Detalhes do Pedido - Cliente: {{ selectedPedido.cliente.razaoSocial }}</h2>
+
+<mat-dialog-content>
+  <!-- Exibir lista de pedidos como botões quando nenhum pedido está selecionado -->
+  <div *ngIf="!selectedPedido">
+    <div *ngFor="let period of getOrderedPeriods(data.pedidos)">
+        <h3>{{ period.periodKey }}</h3>
+        <ul>
+          <li *ngFor="let pedido of period.pedidos">
+            <button mat-button (click)="selectPedido(pedido)">
+              Pedido ID: {{ pedido.id }} - Cliente: {{ pedido.cliente.razaoSocial }} - Total: {{ pedido.valorTotal | currency:'BRL' }}
+            </button>
+          </li>
+        </ul>
+      </div>      
+  </div>
+
+  <!-- Exibir detalhes do pedido selecionado -->
+  <div *ngIf="selectedPedido">
+    <h3>Itens do Pedido</h3>
+    <table class="itens-table">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Valor Unitário</th>
+          <th>Valor Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of selectedPedido.itens">
+          <td>{{ item.produto?.descricao }}</td>
+          <td>{{ item.quantidade }}</td>
+          <td>{{ item.preco | currency:'BRL' }}</td>
+          <td>{{ (item.quantidade * item.preco) | currency:'BRL' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <!-- Botão de voltar quando um pedido está selecionado -->
+  <button mat-button *ngIf="selectedPedido" (click)="clearSelectedPedido()">Voltar</button>
+
+  <!-- Botão de produzir o pedido quando um pedido está selecionado -->
+  <button mat-button *ngIf="selectedPedido" (click)="produzirPedido()">Produzir Pedido</button>
+
+  <!-- Botão de fechar quando nenhum pedido está selecionado -->
+  <button mat-button *ngIf="!selectedPedido" (click)="onClose()">Fechar</button>
+</mat-dialog-actions>

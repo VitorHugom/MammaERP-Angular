@@ -9,12 +9,16 @@ import { CozinhaHomeComponent } from './components/cozinha-home/cozinha-home.com
 import { ProdutosBuscaComponent } from './components/produtos-busca/busca-produtos.component';
 import { ProdutosCadastroComponent } from './components/produtos-cadastro/produtos-cadastro.component';
 import { GrupoProdutosBuscaComponent } from './components/grupo-produtos-busca/grupo-produtos-busca.component';
+import { PeriodosEntregaBuscaComponent } from './components/periodos-entrega-busca/periodos-entrega-busca.component';
+import { PeriodoEntregaCadastroComponent } from './components/periodos-entrega-cadastro/periodos-entrega-cadastro.component';
 import { GrupoProdutosCadastroComponent } from './components/grupo-produtos-cadastro/grupo-produtos-cadastro.component';
 import { ClientesBuscaComponent } from './components/clientes-busca/clientes-busca.component';
 import { ClientesCadastroComponent } from './components/clientes-cadastro/clientes-cadastro.component';
 import { PedidosBuscaComponent } from './components/pedidos-busca/pedidos-busca.component';
 import { PedidosCadastroComponent } from './components/pedidos-cadastro/pedidos-cadastro.component';
 import { NovoPedidoVendas } from './components/novo-pedido-vendas/novo-pedido-vendas.component';
+import { AgendaPedidosComponent } from './components/agenda-pedidos/agenda-pedidos.component';
+import { ProducaoPedidoComponent } from './components/producao-pedido/producao-pedido.component';
 
 import { AuthGuard } from './services/auth-guard.service';
 
@@ -37,6 +41,9 @@ export const routes: Routes = [
     { path: 'grupo-produtos-busca', component: GrupoProdutosBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
     { path: 'grupo-produtos/:id', component: GrupoProdutosCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
 
+    { path: 'periodos-entrega-busca', component: PeriodosEntregaBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+    { path: 'periodos-entrega/:id', component: PeriodoEntregaCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+
     { path: 'clientes-busca', component: ClientesBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS'] }},
     { path: 'clientes/:id', component: ClientesCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS'] }},
 
@@ -44,6 +51,11 @@ export const routes: Routes = [
     { path: 'pedidos-cadastro/:id', component: PedidosCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS'] }},
 
     { path: 'novo-pedido-vendas', component: NovoPedidoVendas, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_VENDAS'] }},
+
+
+    { path: 'agenda-pedido', component: AgendaPedidosComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_COZINHA'] }},
+    { path: 'producao-pedido/:id', component: ProducaoPedidoComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_COZINHA'] }},
+
     
 
     { path: '', redirectTo: '/login', pathMatch: 'full' }

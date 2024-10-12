@@ -54,6 +54,13 @@ export class GerencialHomeComponent {
               ]
             }
           ]
+        },
+        {
+          label: 'Básico',
+          icone: 'images/icone-arrow.png',
+          subItems: [
+            { label: 'Períodos de Entrega', routerLink: '/periodos-entrega-busca'}
+          ]
         }
       ]
     },
