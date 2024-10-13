@@ -58,10 +58,17 @@ export class PedidosBuscaComponent implements OnInit {
       this.router.navigate(['/gerencial-home']);
     }else if (role === 'ROLE_VENDAS'){
       this.router.navigate(['/vendas-home']);
-    }    
+    }else if (role === 'ROLE_COZINHA'){
+      this.router.navigate(['/cozinha-home']);
+    }
   }
 
   createNovoPedido(): void {
-    this.router.navigate(['/pedidos-cadastro/novo']);
+    const role = sessionStorage.getItem('user-role');
+    if (role === 'ROLE_VENDAS'){
+      this.router.navigate(['/novo-pedido-vendas']);
+    }else{
+      this.router.navigate(['/pedidos-cadastro/novo']);
+    }
   }
 }

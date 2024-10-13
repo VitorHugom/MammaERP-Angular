@@ -39,13 +39,23 @@ export class PedidosModalComponent {
   // Função chamada ao clicar no botão de "Produzir Pedido"
   produzirPedido(): void {
     if (this.selectedPedido) {
-      
-      this.router.navigate(['/producao-pedido', this.selectedPedido.id]);
-      
-      // Fechar o modal
-      this.dialogRef.close();
+      this.pedidosService.atualizarStatusPedido(this.selectedPedido.id, 'em_producao').subscribe({
+        next: () => {
+          console.log('Status alterado para "em_producao"!');
+          
+          // Redirecionar para a página de produção
+          this.router.navigate(['/producao-pedido', this.selectedPedido.id]);
+  
+          // Fechar o modal
+          this.dialogRef.close();
+        },
+        error: (err) => {
+          console.error('Erro ao alterar o status para "em_producao":', err);
+          // Exibir uma mensagem de erro ou fazer o tratamento apropriado
+        }
+      });
     }
-  }
+  }  
 
   onClose(): void {
     this.dialogRef.close();

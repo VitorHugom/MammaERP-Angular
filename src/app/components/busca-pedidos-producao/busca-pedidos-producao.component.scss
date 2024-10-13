@@ -1,0 +1,76 @@
+.busca-pedidos-container {
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+  
+    .search-container {
+      display: flex;
+      gap: 10px;
+  
+      .search-input,
+      .search-select,
+      .search-button {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+  
+      .search-input {
+        flex: 1;
+      }
+  
+      .search-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  
+    .pedido-table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      th, td {
+        padding: .5rem 1rem;
+        text-align: left;
+      }
+  
+      thead {
+        background-color: #E0E0E0;
+      }
+  
+      tbody tr {
+        cursor: pointer;
+        &:hover {
+          background-color: #E8E8E8;
+        }
+      }
+    }
+  
+    .button-container {
+      display: flex;
+      justify-content: flex-start;
+  
+      .nav-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+  

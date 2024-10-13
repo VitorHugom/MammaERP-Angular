@@ -66,11 +66,20 @@ export class ProducaoPedidoComponent implements OnInit {
   }
 
   finalizarPedido(): void {
-    console.log('Pedido finalizado!');
-    // Adicione a lógica de finalização do pedido aqui
+    if (this.pedidoId) {
+      this.pedidosService.atualizarStatusPedido(this.pedidoId, 'entregue').subscribe({
+        next: () => {
+          console.log('Pedido finalizado com sucesso!');
+          this.router.navigate(['/cozinha-home']);
+        },
+        error: (err) => {
+          console.error('Erro ao finalizar pedido:', err);
+        }
+      });
+    }
   }
 
   goBack(): void {
-    this.router.navigate(['/agenda-pedido']);
+    this.router.navigate(['/cozinha-home']);
   }
 }

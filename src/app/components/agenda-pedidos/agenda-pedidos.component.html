@@ -1,16 +1,17 @@
 <div class="agenda-container">
-    <h1>Agenda de Pedidos</h1>
+  <h1>Agenda de Pedidos</h1>
 
-    <!-- Botão Voltar para Home -->
-    <button class="back-button" (click)="goToHome()">Voltar para Home</button>
+  <!-- Botão Voltar para Home -->
+  <button class="back-button" (click)="goToHome()">Voltar para Home</button>
   
-    <!-- Navegação entre meses -->
-    <div class="month-navigation">
-      <button (click)="previousMonth()">&#8249; Mês Anterior</button>
-      <span>{{ getMonthName(currentMonth) }} de {{ currentYear }}</span>
-      <button (click)="nextMonth()">Próximo Mês &#8250;</button>
-    </div>
+  <!-- Navegação entre meses -->
+  <div class="month-navigation">
+    <button (click)="previousMonth()">&#8249; Mês Anterior</button>
+    <span>{{ getMonthName(currentMonth) }} de {{ currentYear }}</span>
+    <button (click)="nextMonth()">Próximo Mês &#8250;</button>
+  </div>
   
+  <div class="calendar-wrapper">
     <div class="calendar">
       <div *ngFor="let date of getKeys(pedidosOrganizados)" 
            class="day" 
@@ -20,4 +21,4 @@
       </div>
     </div>
   </div>
-  
+</div>

@@ -27,6 +27,10 @@ export class CozinhaHomeComponent {
   }
 
   abrirPedidos(): void {
-    this.router.navigate(['/pedidos']);
+    this.router.navigate(['/pedidos-busca']);
+  }
+
+  abrirPedidosEmProducao(): void {
+    this.router.navigate(['/busca-pedido-producao']);
   }
 }

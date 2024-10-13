@@ -403,21 +403,26 @@ export class PedidosCadastroComponent implements OnInit {
   }
 
   onNew(): void {
-    this.isNew = true;
-    this.pedido = {
-      id: null,
-      cliente: null,
-      vendedor: null,
-      dataEmissao: '',
-      valorTotal: null,
-      status: 'aguardando',
-      tipoCobranca: null,
-      itens: []
-    };
-    this.clienteInput = '';
-    this.vendedorInput = '';
-    this.clientes = [];
-    this.vendedores = [];
+    const role = sessionStorage.getItem('user-role');
+    if (role === 'ROLE_VENDAS'){
+      this.router.navigate(['/novo-pedido-vendas']);
+    }else{
+      this.isNew = true;
+      this.pedido = {
+        id: null,
+        cliente: null,
+        vendedor: null,
+        dataEmissao: '',
+        valorTotal: null,
+        status: 'aguardando',
+        tipoCobranca: null,
+        itens: []
+      };
+      this.clienteInput = '';
+      this.vendedorInput = '';
+      this.clientes = [];
+      this.vendedores = [];
+    }
   }
 
   onConsultar(): void {

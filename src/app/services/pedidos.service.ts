@@ -62,5 +62,16 @@ export class PedidosService {
   getPedidosPorMes(ano: number, mes: number, page: number = 0, size: number = 10): Observable<any> {
     return this.http.get(`${this.baseUrl}/agenda/${ano}/${mes}?page=${page}&size=${size}`);
   }
+
+  // Função para alterar o status do pedido
+  atualizarStatusPedido(id: string, status: string): Observable<any> {
+    const url = `${this.baseUrl}/${id}/status`;  // Endpoint que altera o status do pedido
+    const payload = { status };                  // Payload dinâmico para atualizar o status
+    return this.http.put(url, payload);          // Fazendo o PUT para atualizar o status
+  }
+
+  getPedidosEmProducao(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/em-producao`);
+  }  
   
 }

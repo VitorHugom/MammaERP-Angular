@@ -19,6 +19,7 @@ import { PedidosCadastroComponent } from './components/pedidos-cadastro/pedidos-
 import { NovoPedidoVendas } from './components/novo-pedido-vendas/novo-pedido-vendas.component';
 import { AgendaPedidosComponent } from './components/agenda-pedidos/agenda-pedidos.component';
 import { ProducaoPedidoComponent } from './components/producao-pedido/producao-pedido.component';
+import { BuscaPedidosProducaoComponent } from './components/busca-pedidos-producao/busca-pedidos-producao.component';
 
 import { AuthGuard } from './services/auth-guard.service';
 
@@ -47,14 +48,15 @@ export const routes: Routes = [
     { path: 'clientes-busca', component: ClientesBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS'] }},
     { path: 'clientes/:id', component: ClientesCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS'] }},
 
-    { path: 'pedidos-busca', component: PedidosBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS'] }},
-    { path: 'pedidos-cadastro/:id', component: PedidosCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS'] }},
+    { path: 'pedidos-busca', component: PedidosBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS', 'ROLE_COZINHA'] }},
+    { path: 'pedidos-cadastro/:id', component: PedidosCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS', 'ROLE_COZINHA'] }},
 
     { path: 'novo-pedido-vendas', component: NovoPedidoVendas, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_VENDAS'] }},
 
 
     { path: 'agenda-pedido', component: AgendaPedidosComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_COZINHA'] }},
     { path: 'producao-pedido/:id', component: ProducaoPedidoComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_COZINHA'] }},
+    { path: 'busca-pedido-producao', component: BuscaPedidosProducaoComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_COZINHA'] }},
 
     
 
