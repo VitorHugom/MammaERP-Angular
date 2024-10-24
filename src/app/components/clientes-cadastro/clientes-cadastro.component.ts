@@ -20,7 +20,7 @@ export class ClientesCadastroComponent implements OnInit {
   isLoading = false;
   cliente: any = {
     id: null,
-    tipoPessoa: 'FISICA', // Valor padrão é pessoa física
+    tipoPessoa: '',
     cpf: '',
     cnpj: '',
     cpfCnpj: '',
@@ -120,14 +120,30 @@ export class ClientesCadastroComponent implements OnInit {
   }
 
   // Função para mascarar o celular
-get celularMask(): string {
-  return '(00) 00000-0000'; // Máscara para celular com 9 dígitos
-}
+  get celularMask(): string {
+    return '(00) 00000-0000'; // Máscara para celular com 9 dígitos
+  }
 
-// Função para mascarar o telefone fixo
-get telefoneMask(): string {
-  return '(00) 0000-0000'; // Máscara para telefone fixo com 8 dígitos
-}
+  // Função para mascarar o telefone fixo
+  get telefoneMask(): string {
+    return '(00) 0000-0000'; // Máscara para telefone fixo com 8 dígitos
+  }
+
+  // Função para formatar o CPF ou CNPJ
+  formatCpfCnpj(value: string): string {
+    if (!value) {
+      return '';
+    }
+
+    // Verifica se o cliente é pessoa física e aplica a máscara de CPF
+    if (this.cliente.tipoPessoa === 'fisica') {
+      return value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    } 
+    
+    // Caso contrário, aplica a máscara de CNPJ
+    return value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+  }
+
 
 
   // Função que define se o campo CPF/CNPJ é editável (somente quando for novo cliente)
@@ -220,7 +236,7 @@ get telefoneMask(): string {
     const today = new Date();
     this.cliente = {
       id: null,
-      tipoPessoa: 'FISICA',
+      tipoPessoa: '',
       cpf: '',
       cnpj: '',
       nomeFantasia: null,

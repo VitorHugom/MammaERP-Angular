@@ -41,7 +41,12 @@ export class SignupComponent {
     constructor(private signupService: SignupService, private router: Router) {}
 
     onSubmit(): void {
-        // Cria o objeto de requisição com categoria_id e telefone
+
+        if (this.signupData.password != this.signupData.confirmPassword){
+            this.isModalOpen = true;
+            this.message = 'As senhas não são iguais, tente novamente.';
+        }else{
+            // Cria o objeto de requisição com categoria_id e telefone
         const requestData = {
             nomeUsuario: this.signupData.username,
             email: this.signupData.email,
@@ -69,6 +74,7 @@ export class SignupComponent {
                 this.message = 'Erro ao enviar dados. Tente novamente.';
             }
         });
+        }
     }
 
     closeModal() {

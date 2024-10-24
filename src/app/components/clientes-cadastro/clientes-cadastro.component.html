@@ -15,19 +15,21 @@
           <span>{{ cliente.tipoPessoa === 'fisica' ? 'Pessoa Física' : 'Pessoa Jurídica' }}</span>
         </div>
       </div>
-      <div class="info-item cpf-cnpj-group">
+
+      <!-- Campo de CPF ou CNPJ, exibido somente após a seleção do tipo de pessoa -->
+      <div *ngIf="cliente.tipoPessoa" class="info-item cpf-cnpj-group">
         <label><strong>{{ cliente.tipoPessoa === 'fisica' ? 'CPF:' : 'CNPJ:' }}</strong></label>
         <div *ngIf="isNew" class="input-inline">
           <input 
-            type="text" 
-            [(ngModel)]="cliente.cpfCnpj" 
-            [attr.placeholder]="cliente.tipoPessoa === 'fisica' ? 'Digite o CPF' : 'Digite o CNPJ'" 
+            type="text"
+            [(ngModel)]="cliente.cpfCnpj"
+            [attr.placeholder]="cliente.tipoPessoa === 'fisica' ? 'Digite o CPF' : 'Digite o CNPJ'"
             [mask]="cpfCnpjMask"
-            [ngModelOptions]="{ updateOn: 'blur' }" 
+            [ngModelOptions]="{ updateOn: 'blur' }"
           />
         </div>
         <div *ngIf="!isNew" class="input-inline">
-          <span>{{ cliente.tipoPessoa === 'fisica' ? cliente.cpf : cliente.cnpj }}</span>
+          <span>{{ formatCpfCnpj(cliente.tipoPessoa === 'fisica' ? cliente.cpf : cliente.cnpj) }}</span>
         </div>
       </div>
     </div>
