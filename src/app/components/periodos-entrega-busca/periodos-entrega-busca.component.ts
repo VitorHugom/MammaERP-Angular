@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { PeriodosEntregaService } from '../../services/periodos-entrega.service'; // Serviço de períodos de entrega
-import { Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { PeriodosEntregaService } from '../../services/periodos-entrega.service';
 
 @Component({
   selector: 'app-periodos-entrega-busca',
@@ -21,6 +20,8 @@ export class PeriodosEntregaBuscaComponent implements OnInit {
   page: number = 0;
   size: number = 10;
   totalPages: number = 0;
+  lastSearchQuery: string = '';
+  lastSearchBy: string = '';
 
   constructor(private periodosEntregaService: PeriodosEntregaService, private router: Router) {}
 
@@ -39,14 +40,16 @@ export class PeriodosEntregaBuscaComponent implements OnInit {
     });
   }
 
-  searchPeriodosEntrega(keepPage: boolean = false): void {
-    if (!keepPage) this.page = 0; // Redefine a página apenas quando keepPage for falso
-  
+  searchPeriodosEntrega(): void {
+    this.page = 0;
+    this.lastSearchQuery = this.searchQuery;
+    this.lastSearchBy = this.searchBy;
+
     if (this.searchQuery === '') {
       this.loadPeriodos();
       return;
     }
-  
+
     if (this.searchBy === 'id') {
       const id = Number(this.searchQuery);
       if (!isNaN(id)) {
@@ -66,18 +69,25 @@ export class PeriodosEntregaBuscaComponent implements OnInit {
         error: (err) => { console.error('Erro ao buscar por descricao:', err); this.filteredPeriodos = []; }
       });
     }
-  }  
-
-  viewPeriodo(id: number): void {
-    this.router.navigate([`/periodos-entrega`, id]);
   }
 
   goToPage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.page = page;
-      this.searchPeriodosEntrega(true); // Evita redefinir para 0
+
+      if (this.lastSearchQuery) {
+        this.searchQuery = this.lastSearchQuery;
+        this.searchBy = this.lastSearchBy;
+        this.searchPeriodosEntrega();
+      } else {
+        this.loadPeriodos();
+      }
     }
-  }  
+  }
+
+  viewPeriodo(id: number): void {
+    this.router.navigate([`/periodos-entrega`, id]);
+  }
 
   navigateToHome(): void {
     this.router.navigate(['/gerencial-home']);

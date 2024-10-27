@@ -18,6 +18,8 @@ export class ClientesBuscaComponent implements OnInit {
   searchBy: string = 'razaoSocial';
   page: number = 0;
   totalPages: number = 0;
+  lastSearchQuery: string = '';
+  lastSearchBy: string = '';
 
   constructor(private clientesService: ClientesService, private router: Router) {}
 
@@ -39,6 +41,8 @@ export class ClientesBuscaComponent implements OnInit {
 
   searchClientes(): void {
     this.page = 0;
+    this.lastSearchQuery = this.searchQuery;
+    this.lastSearchBy = this.searchBy;
 
     if (!this.searchQuery) {
       this.loadClientes();
@@ -73,7 +77,14 @@ export class ClientesBuscaComponent implements OnInit {
   goToPage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.page = page;
-      this.searchClientes();
+
+      if (this.lastSearchQuery) {
+        this.searchQuery = this.lastSearchQuery;
+        this.searchBy = this.lastSearchBy;
+        this.searchClientes();
+      } else {
+        this.loadClientes();
+      }
     }
   }
 

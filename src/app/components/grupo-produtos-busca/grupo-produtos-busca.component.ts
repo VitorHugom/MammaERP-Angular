@@ -20,6 +20,9 @@ export class GrupoProdutosBuscaComponent implements OnInit {
   page: number = 0;
   size: number = 10;
   totalPages: number = 0;
+  lastSearchQuery: string = '';
+  lastSearchBy: string = '';
+
 
   constructor(private grupoProdutosService: GrupoProdutosService, private router: Router) {}
 
@@ -38,13 +41,16 @@ export class GrupoProdutosBuscaComponent implements OnInit {
     });
   }
 
-  searchGrupos(): void {
-    this.page = 0;
+  searchGrupos(keepPage: boolean = false): void {
+    if (!keepPage) this.page = 0;
+    this.lastSearchQuery = this.searchQuery;
+    this.lastSearchBy = this.searchBy;
+  
     if (this.searchQuery === '') {
       this.loadGrupos();
       return;
     }
-
+  
     if (this.searchBy === 'id') {
       const id = Number(this.searchQuery);
       if (!isNaN(id)) {
@@ -64,7 +70,7 @@ export class GrupoProdutosBuscaComponent implements OnInit {
         error: (err) => { console.error('Erro ao buscar por nome:', err); this.filteredGrupos = []; }
       });
     }
-  }
+  }  
 
   viewGrupo(id: string): void {
     this.router.navigate(['/grupo-produtos', id]);
@@ -73,9 +79,16 @@ export class GrupoProdutosBuscaComponent implements OnInit {
   goToPage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.page = page;
-      this.searchGrupos();
+      if (this.lastSearchQuery) {
+        this.searchQuery = this.lastSearchQuery;
+        this.searchBy = this.lastSearchBy;
+        this.searchGrupos(true);
+      } else {
+        this.loadGrupos();
+      }
     }
   }
+  
 
   navigateToHome(): void {
     this.router.navigate(['/gerencial-home']);

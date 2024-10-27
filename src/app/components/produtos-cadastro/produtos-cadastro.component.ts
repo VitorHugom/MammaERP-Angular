@@ -66,15 +66,19 @@ export class ProdutosCadastroComponent implements OnInit {
     this.grupoProdutosService.getGruposProdutos().subscribe({
       next: (data) => {
         this.gruposProdutos = data; // Recebe e armazena os grupos de produtos
-        if (this.produto.grupoProdutos) {
-          // Atualiza grupo de produtos após carregar todos os grupos disponíveis
-          this.produto.grupoProdutos = this.gruposProdutos.find(grupo => grupo.id === this.produto.grupoProdutos.id);
-        }
+        this.machGruposProdutos();
       },
       error: (err) => {
         console.error('Erro ao carregar grupos de produtos:', err);
       }
     });
+  }
+
+  machGruposProdutos(): void{
+    if (this.produto.grupoProdutos) {
+      // Atualiza grupo de produtos
+      this.produto.grupoProdutos = this.gruposProdutos.find(grupo => grupo.id === this.produto.grupoProdutos.id);
+    }
   }
 
   onSave(): void {
@@ -92,6 +96,7 @@ export class ProdutosCadastroComponent implements OnInit {
       this.produtoService.createProduto(this.produto).subscribe({
         next: (response) => {
           this.produto = response;
+          this.machGruposProdutos();
           this.isNew = false;
           this.exibirMensagem('Produto cadastrado com sucesso!', true);
         },
