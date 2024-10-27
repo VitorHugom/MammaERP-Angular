@@ -120,7 +120,7 @@ export class ProdutosCadastroComponent implements OnInit {
         this.produtoService.deleteProduto(this.produto.id).subscribe({
           next: () => {
             this.exibirMensagem('Produto deletado com sucesso!', true);
-            this.router.navigate(['/busca-produtos']);
+            this.router.navigate(['/produtos-busca']);
           },
           error: (err) => {
             this.exibirMensagem('Erro ao deletar produto. Tente novamente.', false);
@@ -155,7 +155,7 @@ export class ProdutosCadastroComponent implements OnInit {
   }
 
   onConsultar(): void {
-    this.router.navigate(['/busca-produtos']);
+    this.router.navigate(['/produtos-busca']);
   }
 
   // Função para exibir mensagem com timeout de 5 segundos

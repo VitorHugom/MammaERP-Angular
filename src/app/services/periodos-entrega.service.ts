@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -33,5 +33,15 @@ export class PeriodosEntregaService {
   // Deleta um período de entrega pelo ID
   deletePeriodoEntrega(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
+  buscarPeriodosEntregaPorDescricao(nome: string, page: number = 0): Observable<any> {
+    const params = new HttpParams().set('page', page.toString()).set('nome', nome);
+    return this.http.get(`${this.baseUrl}/busca-por-descricao`, { params });
+  }
+
+  getPeriodosEntregaBusca(page: number = 0): Observable<any> {
+    const params = new HttpParams().set('page', page.toString());
+    return this.http.get(`${this.baseUrl}/busca`, { params });
   }
 }

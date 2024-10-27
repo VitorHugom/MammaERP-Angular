@@ -54,7 +54,7 @@
     <div class="form-group">
       <label for="periodoEntrega">Período de Entrega</label>
       <select id="periodoEntrega" [(ngModel)]="pedido.periodoEntrega" name="periodoEntrega">
-        <option *ngFor="let periodo of periodosEntrega" [ngValue]="periodo">{{ periodo.descricao }}</option>
+        <option *ngFor="let periodo of periodosEntrega" [ngValue]="periodo">{{ periodo.descricao }} - {{ periodo.horarioInicio }} às {{ periodo.horarioFim }}</option>
       </select>
     </div>
 

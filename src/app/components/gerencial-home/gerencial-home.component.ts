@@ -43,7 +43,7 @@ export class GerencialHomeComponent {
           label: 'Produtos',
           icone: 'images/icone-arrow.png',
           subItems: [
-            { label: 'Cadastro', routerLink: '/busca-produtos' },
+            { label: 'Cadastro', routerLink: '/produtos-busca' },
             { label: 'Grupo de Produtos', routerLink: '/grupo-produtos-busca' },
             {
               label: 'Relatórios',

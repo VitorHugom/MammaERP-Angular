@@ -281,7 +281,7 @@ export class PedidosCadastroComponent implements OnInit {
 
   onSave(): void {
     // Verificação de campos obrigatórios
-    if (!this.pedido.cliente || !this.pedido.vendedor || !this.pedido.tipoCobranca) {
+    if (!this.pedido.cliente || !this.pedido.vendedor || !this.pedido.tipoCobranca || !this.pedido.periodoEntrega || !this.pedido.dataEntrega) {
       this.exibirMensagem('Preencha todos os campos obrigatórios.', false);
       return;
     }
@@ -322,6 +322,7 @@ export class PedidosCadastroComponent implements OnInit {
           this.salvarItensEExcluirMarcados(response.id);
           this.exibirMensagem('Pedido cadastrado com sucesso!', true);
           this.isNew = false;
+          this.router.navigate(['/pedidos-cadastro/' + response.id]);
         },
         error: (err) => {
           this.exibirMensagem('Erro ao cadastrar pedido.', false);
@@ -364,6 +365,7 @@ export class PedidosCadastroComponent implements OnInit {
         // Adiciona novo item
         this.pedidosService.addItemPedido(idPedido.toString(), itemPayload).subscribe({
           next: (response) => {
+            item.id = response.id;
             console.log('Item adicionado com sucesso:', response);
           },
           error: (err) => {
