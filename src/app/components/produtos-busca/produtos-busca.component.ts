@@ -51,7 +51,7 @@ export class ProdutosBuscaComponent implements OnInit {
     }
 
     if (this.searchBy === 'id') {
-      this.produtosService.getProdutoById(this.searchQuery).subscribe({
+      this.produtosService.getSimpleProdutosById(this.searchQuery).subscribe({
         next: (data) => {
           this.produtos = data ? [data] : [];
           this.totalPages = 1;

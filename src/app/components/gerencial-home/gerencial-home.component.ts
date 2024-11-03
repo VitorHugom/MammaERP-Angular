@@ -38,7 +38,7 @@ export class GerencialHomeComponent {
             { label: 'Relatórios', routerLink: '/relatorio-clientes' }
           ]
         },
-        { label: 'Fornecedores', routerLink: '/fornecedores' },
+        { label: 'Fornecedores', routerLink: '/fornecedores-busca' },
         {
           label: 'Produtos',
           icone: 'images/icone-arrow.png',

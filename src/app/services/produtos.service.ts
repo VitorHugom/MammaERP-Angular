@@ -17,9 +17,11 @@ export class ProdutosService {
   getProdutoById(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
-  getSimplePedidoById(id: string): Observable<any> {
+  
+  getSimpleProdutosById(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/busca/${id}`);
   }
+
   createProduto(produto: any): Observable<any> {
     return this.http.post(this.baseUrl, produto);
   }

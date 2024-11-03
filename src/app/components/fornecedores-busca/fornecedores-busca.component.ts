@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { ClientesService } from '../../services/clientes.service';
+import { FornecedoresService } from '../../services/fornecedores.service';
 
 @Component({
-  selector: 'app-clientes-busca',
+  selector: 'app-fornecedores-busca',
   standalone: true,
-  templateUrl: './clientes-busca.component.html',
-  styleUrls: ['./clientes-busca.component.scss'],
+  templateUrl: './fornecedores-busca.component.html',
+  styleUrls: ['./fornecedores-busca.component.scss'],
   imports: [FormsModule, CommonModule, RouterModule],
-  providers: [ClientesService]
+  providers: [FornecedoresService]
 })
-export class ClientesBuscaComponent implements OnInit {
-  clientes: any[] = [];
+export class FornecedoresBuscaComponent implements OnInit {
+  fornecedores: any[] = [];
   searchQuery: string = '';
   searchBy: string = 'razaoSocial';
   page: number = 0;
@@ -21,54 +21,54 @@ export class ClientesBuscaComponent implements OnInit {
   lastSearchQuery: string = '';
   lastSearchBy: string = '';
 
-  constructor(private clientesService: ClientesService, private router: Router) {}
+  constructor(private fornecedoresService: FornecedoresService, private router: Router) {}
 
   ngOnInit(): void {
-    this.loadClientes();
+    this.loadFornecedores();
   }
 
-  loadClientes(): void {
-    this.clientesService.getClientesBusca(this.page).subscribe({
+  loadFornecedores(): void {
+    this.fornecedoresService.getFornecedoresBusca(this.page).subscribe({
       next: (data) => {
-        this.clientes = data.content;
+        this.fornecedores = data.content;
         this.totalPages = data.totalPages;
       },
       error: (err) => {
-        console.error('Erro ao carregar clientes:', err);
+        console.error('Erro ao carregar fornecedores:', err);
       }
     });
   }
 
-  searchClientes(): void {
+  searchFornecedores(): void {
     this.page = 0;
     this.lastSearchQuery = this.searchQuery;
     this.lastSearchBy = this.searchBy;
 
     if (!this.searchQuery) {
-      this.loadClientes();
+      this.loadFornecedores();
       return;
     }
 
     if (this.searchBy === 'id') {
-      this.clientesService.getClienteByIdBusca(this.searchQuery).subscribe({
+      this.fornecedoresService.getFornecedorByIdBusca(this.searchQuery).subscribe({
         next: (data) => {
-          this.clientes = data ? [data] : [];
+          this.fornecedores = data ? [data] : [];
           this.totalPages = 1;
         },
         error: (err) => {
-          console.error('Erro ao buscar cliente por ID:', err);
-          this.clientes = [];
+          console.error('Erro ao buscar fornecedor por ID:', err);
+          this.fornecedores = [];
         }
       });
     } else if (this.searchBy === 'razaoSocial') {
-      this.clientesService.getClientesByRazaoSocialBusca(this.searchQuery, this.page).subscribe({
+      this.fornecedoresService.getFornecedoresByRazaoSocialBusca(this.searchQuery, this.page).subscribe({
         next: (data) => {
-          this.clientes = data.content;
+          this.fornecedores = data.content;
           this.totalPages = data.totalPages;
         },
         error: (err) => {
-          console.error('Erro ao buscar clientes por Razão Social:', err);
-          this.clientes = [];
+          console.error('Erro ao buscar fornecedores por Razão Social:', err);
+          this.fornecedores = [];
         }
       });
     }
@@ -81,27 +81,27 @@ export class ClientesBuscaComponent implements OnInit {
       if (this.lastSearchQuery) {
         this.searchQuery = this.lastSearchQuery;
         this.searchBy = this.lastSearchBy;
-        this.searchClientes();
+        this.searchFornecedores();
       } else {
-        this.loadClientes();
+        this.loadFornecedores();
       }
     }
   }
 
-  viewCliente(id: string): void {
-    this.router.navigate(['/clientes', id]);
+  viewFornecedor(id: string): void {
+    this.router.navigate(['/fornecedor', id]);
   }
 
   navigateToHome(): void {
     const role = sessionStorage.getItem('user-role');
     if (role === 'ROLE_GERENCIAL'){
       this.router.navigate(['/gerencial-home']);
-    }else if (role === 'ROLE_VENDAS'){
+    } else if (role === 'ROLE_VENDAS'){
       this.router.navigate(['/vendas-home']);
     }  
   }
 
-  createNovoCliente(): void {
-    this.router.navigate(['/clientes/novo']);
+  createNovoFornecedor(): void {
+    this.router.navigate(['/fornecedores/novo']);
   }
 }

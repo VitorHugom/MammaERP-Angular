@@ -14,6 +14,7 @@ import { PeriodoEntregaCadastroComponent } from './components/periodos-entrega-c
 import { GrupoProdutosCadastroComponent } from './components/grupo-produtos-cadastro/grupo-produtos-cadastro.component';
 import { ClientesBuscaComponent } from './components/clientes-busca/clientes-busca.component';
 import { ClientesCadastroComponent } from './components/clientes-cadastro/clientes-cadastro.component';
+import { FornecedoresBuscaComponent } from './components/fornecedores-busca/fornecedores-busca.component';
 import { PedidosBuscaComponent } from './components/pedidos-busca/pedidos-busca.component';
 import { PedidosCadastroComponent } from './components/pedidos-cadastro/pedidos-cadastro.component';
 import { NovoPedidoVendas } from './components/novo-pedido-vendas/novo-pedido-vendas.component';
@@ -22,6 +23,7 @@ import { ProducaoPedidoComponent } from './components/producao-pedido/producao-p
 import { BuscaPedidosProducaoComponent } from './components/busca-pedidos-producao/busca-pedidos-producao.component';
 
 import { AuthGuard } from './services/auth-guard.service';
+import { FornecedoresCadastroComponent } from './components/fornecedores-cadastro/fornecedores-cadastro.component';
 
 
 export const routes: Routes = [
@@ -44,6 +46,9 @@ export const routes: Routes = [
 
     { path: 'periodos-entrega-busca', component: PeriodosEntregaBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
     { path: 'periodos-entrega/:id', component: PeriodoEntregaCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+
+    { path: 'fornecedores-busca', component: FornecedoresBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+    { path: 'fornecedor/:id', component: FornecedoresCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
 
     { path: 'clientes-busca', component: ClientesBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS'] }},
     { path: 'clientes/:id', component: ClientesCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS'] }},
