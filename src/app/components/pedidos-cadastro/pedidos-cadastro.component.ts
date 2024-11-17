@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
   standalone: true,
   templateUrl: './pedidos-cadastro.component.html',
   styleUrls: ['./pedidos-cadastro.component.scss'],
-  imports: [CommonModule, FormsModule, RouterLink, AddItemModalComponent]
+  imports: [CommonModule, FormsModule]
 })
 export class PedidosCadastroComponent implements OnInit {
   isNew = true;
@@ -288,8 +288,10 @@ export class PedidosCadastroComponent implements OnInit {
   
     // Definir a data de emissão para pedidos novos
     if (this.isNew) {
-      this.pedido.dataEmissao = new Date().toISOString();
-    }
+      const now = new Date();
+      now.setHours(now.getHours() - now.getTimezoneOffset() / 60); // Ajusta para GMT-3
+      this.pedido.dataEmissao = now.toISOString();
+    }    
   
     const pedidoPayload = {
       idCliente: this.pedido.cliente.id,

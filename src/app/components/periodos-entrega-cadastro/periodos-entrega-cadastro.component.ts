@@ -86,7 +86,7 @@ export class PeriodoEntregaCadastroComponent implements OnInit {
         this.periodosEntregaService.deletePeriodoEntrega(this.periodoEntrega.id).subscribe({
           next: () => {
             this.exibirMensagem('Período de entrega deletado com sucesso!', true);
-            this.router.navigate(['/periodo-entrega-busca']);
+            this.router.navigate(['/periodos-entrega-busca']);
           },
           error: (err) => {
             this.exibirMensagem('Erro ao deletar período de entrega. Tente novamente.', false);

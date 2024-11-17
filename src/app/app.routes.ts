@@ -24,6 +24,9 @@ import { BuscaPedidosProducaoComponent } from './components/busca-pedidos-produc
 
 import { AuthGuard } from './services/auth-guard.service';
 import { FornecedoresCadastroComponent } from './components/fornecedores-cadastro/fornecedores-cadastro.component';
+import { RecebimentoMercadoriasBuscaComponent } from './components/recebimento-mercadorias-busca/recebimento-mercadorias-busca.component';
+import { RecebimentoMercadoriasCadastroComponent } from './components/recebimento-mercadorias-cadastro/recebimento-mercadorias-cadastro.component';
+import { MovimentoEstoqueBuscaComponent } from './components/movimento-estoque-busca/movimento-estoque-busca.component';
 
 
 export const routes: Routes = [
@@ -55,6 +58,11 @@ export const routes: Routes = [
 
     { path: 'pedidos-busca', component: PedidosBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS', 'ROLE_COZINHA'] }},
     { path: 'pedidos-cadastro/:id', component: PedidosCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL', 'ROLE_VENDAS', 'ROLE_COZINHA'] }},
+
+    { path: 'recebimento-mercadorias-busca', component: RecebimentoMercadoriasBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+    { path: 'recebimento-mercadorias-cadastro/:id', component: RecebimentoMercadoriasCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+
+    { path: 'movimento-estoque-busca', component: MovimentoEstoqueBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
 
     { path: 'novo-pedido-vendas', component: NovoPedidoVendas, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_VENDAS'] }},
 
