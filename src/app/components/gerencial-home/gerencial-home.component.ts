@@ -94,7 +94,8 @@ export class GerencialHomeComponent {
       icone: 'images/icone-arrow.png',
       label: 'Estoque',
       subItems: [
-        { label: 'Movimento de Estoque', routerLink: '/movimento-estoque-busca' }
+        { label: 'Movimento de Estoque', routerLink: '/movimento-estoque-busca' },
+        { label: 'Estoque', routerLink: '/estoque-busca' }
       ]
     },
     {

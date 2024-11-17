@@ -27,6 +27,7 @@ import { FornecedoresCadastroComponent } from './components/fornecedores-cadastr
 import { RecebimentoMercadoriasBuscaComponent } from './components/recebimento-mercadorias-busca/recebimento-mercadorias-busca.component';
 import { RecebimentoMercadoriasCadastroComponent } from './components/recebimento-mercadorias-cadastro/recebimento-mercadorias-cadastro.component';
 import { MovimentoEstoqueBuscaComponent } from './components/movimento-estoque-busca/movimento-estoque-busca.component';
+import { EstoqueBuscaComponent } from './components/estoque-busca/estoque-busca.component';
 
 
 export const routes: Routes = [
@@ -63,6 +64,8 @@ export const routes: Routes = [
     { path: 'recebimento-mercadorias-cadastro/:id', component: RecebimentoMercadoriasCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
 
     { path: 'movimento-estoque-busca', component: MovimentoEstoqueBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+
+    { path: 'estoque-busca', component: EstoqueBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
 
     { path: 'novo-pedido-vendas', component: NovoPedidoVendas, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_VENDAS'] }},
 
