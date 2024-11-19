@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
       return false;
     }
   
-    // Se não estiver no contexto do navegador, impede a navegação
+    // Se não estiver no contexto do navegador, impede a navegação do navegador
     return false;
   }
 }
