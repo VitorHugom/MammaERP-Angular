@@ -59,7 +59,8 @@ export class GerencialHomeComponent {
           label: 'Básico',
           icone: 'images/icone-arrow.png',
           subItems: [
-            { label: 'Períodos de Entrega', routerLink: '/periodos-entrega-busca'}
+            { label: 'Períodos de Entrega', routerLink: '/periodos-entrega-busca'},
+            { label: 'Formas de Pagamento', routerLink: '/forma-pagamento-busca'}
           ]
         }
       ]
@@ -75,10 +76,9 @@ export class GerencialHomeComponent {
     {
       image:'images/icone-faturamento.png',
       icone: 'images/icone-arrow.png',
-      label: 'Faturamento',
+      label: 'Financeiro',
       subItems: [
-        { label: 'Emissão de NFe', routerLink: '/emissao-nfe' },
-        { label: 'Envio de NFe', routerLink: '/envio-nfe' }
+        { label: 'Contas a Pagar', routerLink: '/contas-pagar-busca' }
       ]
     },
     {

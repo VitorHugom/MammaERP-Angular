@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AgendaPedidosComponent } from '../agenda-pedidos/agenda-pedidos.component';
 
 @Component({
   selector: 'app-cozinha-home',

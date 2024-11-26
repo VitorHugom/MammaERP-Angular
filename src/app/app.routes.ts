@@ -28,6 +28,10 @@ import { RecebimentoMercadoriasBuscaComponent } from './components/recebimento-m
 import { RecebimentoMercadoriasCadastroComponent } from './components/recebimento-mercadorias-cadastro/recebimento-mercadorias-cadastro.component';
 import { MovimentoEstoqueBuscaComponent } from './components/movimento-estoque-busca/movimento-estoque-busca.component';
 import { EstoqueBuscaComponent } from './components/estoque-busca/estoque-busca.component';
+import { FormaPagamentoBuscaComponent } from './components/forma-pagamento-busca/forma-pagamento-busca.component';
+import { FormaPagamentoCadastroComponent } from './components/forma-pagamento-cadastro/forma-pagamento-cadastro.component';
+import { ContasPagarBuscaComponent } from './components/contas-pagar-busca/contas-pagar-busca.component';
+import { ContasPagarCadastroComponent } from './components/contas-pagar-cadastro/contas-pagar-cadastro.component';
 
 
 export const routes: Routes = [
@@ -47,6 +51,12 @@ export const routes: Routes = [
 
     { path: 'grupo-produtos-busca', component: GrupoProdutosBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
     { path: 'grupo-produtos/:id', component: GrupoProdutosCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+
+    { path: 'forma-pagamento-busca', component: FormaPagamentoBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+    { path: 'forma-pagamento/:id', component: FormaPagamentoCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+
+    { path: 'contas-pagar-busca', component: ContasPagarBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
+    { path: 'contas-pagar/:id', component: ContasPagarCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
 
     { path: 'periodos-entrega-busca', component: PeriodosEntregaBuscaComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
     { path: 'periodos-entrega/:id', component: PeriodoEntregaCadastroComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_GERENCIAL'] }},
@@ -72,7 +82,7 @@ export const routes: Routes = [
 
     { path: 'agenda-pedido', component: AgendaPedidosComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_COZINHA'] }},
     { path: 'producao-pedido/:id', component: ProducaoPedidoComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_COZINHA'] }},
-    { path: 'busca-pedido-producao', component: BuscaPedidosProducaoComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_COZINHA'] }},
+    { path: 'busca-pedido-producao', component: BuscaPedidosProducaoComponent, canActivate: [AuthGuard], data: { expectedRoles: ['ROLE_COZINHA']  }},
 
     
 
