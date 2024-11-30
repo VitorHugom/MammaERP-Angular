@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:MammaERP": "node dist/mamma-erp/server/server.mjs"
+    "serve:ssr:MammaERP": "node dist/mamma-erp/server/server.mjs",
+    "build": "ng build --configuration=production",
+    "start:prod": "npx serve -s dist -l $PORT"
   },
   "private": true,
   "dependencies": {
