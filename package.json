@@ -8,7 +8,7 @@
     "test": "ng test",
     "serve:ssr:MammaERP": "node dist/mamma-erp/server/server.mjs",
     "build": "ng build --configuration=production",
-    "start:prod": "npx serve -s dist -l $PORT"
+    "start:prod": "npx serve -s dist/mamma-erp -l $PORT"
   },
   "private": true,
   "dependencies": {
