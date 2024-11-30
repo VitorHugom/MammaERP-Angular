@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeriodosEntregaService {
-  private baseUrl = 'http://localhost:8080/periodos_entrega'; // Endpoint para períodos de entrega
+  private baseUrl = environment.apiUrl + '/periodos_entrega'; // Endpoint para períodos de entrega
 
   constructor(private http: HttpClient) {}
 
