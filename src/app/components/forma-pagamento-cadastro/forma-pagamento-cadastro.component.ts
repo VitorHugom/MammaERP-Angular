@@ -44,16 +44,23 @@ export class FormaPagamentoCadastroComponent implements OnInit {
       this.exibirMensagem('Descrição é obrigatória.', false);
       return;
     }
-
+  
     const saveObservable = this.isNew
       ? this.formaPagamentoService.createFormaPagamento(this.formaPagamento)
       : this.formaPagamentoService.updateFormaPagamento(this.formaPagamento.id, this.formaPagamento);
-
+  
     saveObservable.subscribe({
-      next: () => this.exibirMensagem('Forma de pagamento salva com sucesso!', true),
+      next: (response) => {
+        this.exibirMensagem('Forma de pagamento salva com sucesso!', true);
+        // Atualiza o ID com base na resposta do backend
+        if (this.isNew && response?.id) {
+          this.formaPagamento.id = response.id;
+          this.isNew = false; // Agora o registro não é mais novo
+        }
+      },
       error: () => this.exibirMensagem('Erro ao salvar forma de pagamento.', false)
     });
-  }
+  }  
 
   adicionardiasFormaPagamento(): void {
     if (this.diasFormaPagamento !== null && !this.formaPagamento.diasFormaPagamento.includes(this.diasFormaPagamento)) {
